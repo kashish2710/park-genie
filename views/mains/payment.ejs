@@ -1,14 +1,18 @@
+<!-- views/mains/payment.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Payment Page</title>
 </head>
 <body>
-    <h2>This is payment page</h2>
-    <form action="/p" method="POST">  
-        <button type="submit">Submit</button>
+    <h2>Scan to Pay</h2>
+    <img src="<%= qrCodeDataUrl %>" alt="QR Code" style="width:200px; height:200px;">
+
+    <form action="/confirm-payment" method="POST">
+        <input type="hidden" name="slotNumber" value="<%= slotNumber %>">
+        <button type="submit">Confirm Payment</button>
     </form>
 </body>
 </html>

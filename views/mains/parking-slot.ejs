@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -98,7 +98,7 @@
                     // Use addEventListener for better event handling
                     button.addEventListener("click", function() {
                         if (slot === 0) {
-                            window.open("/mains/index", "_blank");  // Open in a new tab
+                            window.open("/index", "_blank");  // Open in a new tab
                         } else {
                             alert(`Checking slot: ${slotId}`);
                         }
@@ -114,4 +114,199 @@
         renderParkingLot(parkingB, "BLOCKB", "B");
     </script>
 </body>
-</html>
+</html> -->
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Slot Availability</title>
+    <style>
+        .block {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px;
+        }
+        .slot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border: 1px solid black;
+            text-align: center;
+            padding: 5px;
+        }
+        .available {
+            background-color: lightgreen;
+        }
+        .occupied {
+            background-color: red;
+        }
+        button {
+            margin-top: 5px;
+            cursor: pointer;
+            padding: 5px;
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+        .check-btn {
+            background-color: orange;
+        }
+        .check-btn:hover {
+            background-color: darkorange;
+        }
+        .book-btn {
+            background-color: blue;
+        }
+        .book-btn:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Parking Slot Availability</h1>
+   
+    <div id="block-name">
+        <div>Block A</div>
+        <div>Block B</div>
+    </div>
+     
+    <div id="parking-slot">
+        <% slots.forEach(slot => { %>
+            <div class="slot <%= slot.isBooked ? 'occupied' : 'available' %>">
+                <span><%= slot.slotNumber %></span>
+                <% if (!slot.isBooked) { %>
+                    <form action="/index" method="POST">
+                        <input type="hidden" name="slotNumber" value="<%= slot.slotNumber %>">
+                        <button type="submit" class="book-btn">Book</button>
+                    </form>
+                <% } else { %>
+                    <button class="check-btn">Booked</button>
+                <% } %>
+            </div>
+        <% }); %>
+    </div>
+</body>
+</html> -->
+<body>
+    <h1>Parking Slot Availability</h1>
+
+    <div id="block-name">
+        <div>Block A</div>
+        <div>Block B</div>
+    </div>
+     
+    <div id="parking-slot">
+        <% if (slots.length === 0) { %>
+            <p>No slots available.</p>
+        <% } else { %>
+            <% slots.forEach(slot => { %>
+                <div class="slot <%= slot.isBooked ? 'occupied' : 'available' %>">
+                    <span><%= slot.slotNumber %></span>
+                    <% if (!slot.isBooked) { %>
+                        <form action="/next" method="POST">
+                            <input type="hidden" name="slotNumber" value="<%= slot.slotNumber %>">
+                            <button type="submit" class="book-btn">Book</button>
+                        </form>
+                    <% } else { %>
+                        <button class="check-btn">Check</button>
+                    <% } %>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
+</body>
+<style>
+/* Parking slots container */
+#parking-slot {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); /* Adjust slot size */
+    gap: 15px;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+/* Individual slot styling */
+.slot {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Ensures even spacing */
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 12px;
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Slot number styling (centered) */
+.slot span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    flex-grow: 1; /* Ensures text stays at the top */
+}
+
+/* Available (Green) */
+.available {
+    background-color: #4caf50;
+    color: white;
+}
+
+/* Occupied (Red) */
+.occupied {
+    background-color: #d32f2f;
+    color: white;
+}
+
+/* Button styling */
+.book-btn, .check-btn {
+    background-color: white;
+    color: black;
+    padding: 6px 10px;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+    width: 80%; /* Ensures consistent button width */
+    text-align: center;
+}
+
+/* Button hover effects */
+.book-btn:hover {
+    background-color: #e0e0e0;
+}
+
+.check-btn:hover {
+    background-color: #ff6659;
+}
+
+/* Ensure form elements are centered */
+.slot form {
+    margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Fix button alignment */
+.slot button, .slot form {
+    margin-top: auto; /* Pushes the button to the bottom */
+}
+
+
+</style>
