@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Slot Availability</title>
+    <style>
+        .block {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 10px;
+        }
+        .slot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border: 1px solid black;
+            text-align: center;
+            padding: 5px;
+        }
+        .available {
+            background-color: lightgreen;
+        }
+        .occupied {
+            background-color: red;
+        }
+        button {
+            margin-top: 5px;
+            cursor: pointer;
+            padding: 5px;
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+        .check-btn {
+            background-color: orange;
+        }
+        .check-btn:hover {
+            background-color: darkorange;
+        }
+        .book-btn {
+            background-color: blue;
+        }
+        .book-btn:hover {
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Parking Slot Availability</h1>
+   
+    <div id="block-name">
+        <div>Block A</div>
+        <div>Block B</div>
+    </div>
+     
+    <div id="parking-slot">
+        <div class="block" id="BLOCKA"></div>
+        <div class="block" id="BLOCKB"></div>
+    </div>
+
+    <script>
+        const parkingMatrix = [
+            [0, 1, 0, 0, 1],
+            [1, 0, 0, 1, 1],
+            [0, 0, 1, 1, 0],
+            [0, 0, 1, 1, 0],
+        ];
+        const parkingB = [
+            [1, 1, 0, 1, 0],
+            [0, 1, 1, 1, 1],
+            [1, 0, 1, 1, 0],
+            [0, 0, 0, 1, 0],
+        ];
+
+        function renderParkingLot(matrix, containerId, blockName) {
+            const parkingLot = document.getElementById(containerId);
+            parkingLot.innerHTML = ""; // Clear previous content
+
+            matrix.forEach((row, i) => {
+                row.forEach((slot, j) => {
+                    const div = document.createElement("div");
+                    div.classList.add("slot", slot ? "occupied" : "available");
+
+                    const slotText = document.createElement("span");
+                    const slotId = `${blockName}${i + 1}${j + 1}`;
+                    slotText.textContent = slotId;
+                    div.appendChild(slotText);
+
+                    const button = document.createElement("button");
+                    button.textContent = slot === 1 ? "Check" : "Book";
+                    button.classList.add(slot === 1 ? "check-btn" : "book-btn");
+
+                    // Use addEventListener for better event handling
+                    button.addEventListener("click", function() {
+                        if (slot === 0) {
+                            window.open("/mains/index", "_blank");  // Open in a new tab
+                        } else {
+                            alert(`Checking slot: ${slotId}`);
+                        }
+                    });
+
+                    div.appendChild(button);
+                    parkingLot.appendChild(div);
+                });
+            });
+        }
+
+        renderParkingLot(parkingMatrix, "BLOCKA", "A");
+        renderParkingLot(parkingB, "BLOCKB", "B");
+    </script>
+</body>
+</html>

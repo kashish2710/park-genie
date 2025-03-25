@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 const axios = require("axios");
 const cors = require("cors");
+const QRCode = require("qrcode");
 
 // Load Environment Variables
 const CASHFREE_API_URL = process.env.CASHFREE_API_URL;
@@ -125,7 +126,7 @@ app.post("/index", async (req, res) => {
         const { name, phone, carNumber } = req.body;
         const newUser = new User({ name, phone, carNumber });
         await newUser.save();
-        res.send("<h2>✅ Registration Successful!</h2><a href='/'>Go Back</a>");
+        res.render("mains/payment");
     } catch (err) {
         res.status(400).send("❌ Error: " + err.message);
     }
@@ -137,6 +138,24 @@ app.get("/", (req, res) => {
 });
 app.get("/predict", (req, res) => {
     res.render("mains/predict");
+});
+app.get("/slot",(req,res)=>{
+    res.render("mains/parking-slot")
+})
+app.get("/mains/index", (req, res) => {
+    res.render("mains/index");  // Render the EJS file
+});
+app.get("/payment", async (req, res) => {
+    try {
+        const fakeData = "https://example.com/fake-payment";  // Fake QR URL
+        const qrCodeDataUrl = await QRCode.toDataURL(fakeData); // Generate QR code
+        res.render("payment", { qrCodeDataUrl });
+    } catch (err) {
+        res.status(500).send("Error generating QR code");
+    }
+});
+app.post("/p", (req, res) => {
+    res.redirect("/slot");
 });
 
 // **🔹 Start Server**
