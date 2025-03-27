@@ -205,28 +205,32 @@ app.post("/confirm-payment", async (req, res) => {
     const { slotNumber } = req.body;
 
     try {
-        const slot = await Slot.findOne({ slotNumber });
+        const slot = await Slot.findOneAndUpdate(
+            { slotNumber, isBooked: false },  // Only update if not booked
+            { $set: { isBooked: true, bookingTime: new Date() } },
+            { new: true }  // Return updated document
+        );
+
         if (slot) {
-            slot.isBooked = true;
-            slot.bookingTime = new Date();  // Save booking time
-            await slot.save();
-            console.log(`✅ Slot ${slotNumber} marked as booked at ${slot.bookingTime}`);
+            console.log(`✅ Slot ${slotNumber} successfully booked at ${slot.bookingTime}`);
+            res.redirect("/parking-slot");  // Redirect after booking
         } else {
-            console.log(`❌ Slot ${slotNumber} not found!`);
+            console.log(`❌ Slot ${slotNumber} is already booked!`);
+            res.status(400).send("❌ Slot is already booked.");
         }
 
-        res.redirect("/parking-slot");  // Redirect to slot page after confirmation
     } catch (err) {
         console.error("❌ Error updating slot:", err);
         res.status(500).send("❌ Error updating slot booking status.");
     }
 });
 
+
 app.get("/slot", async (req, res) => {
     try {
         const slots = await Slot.find(); 
         if (!slots || slots.length === 0) {
-            console.log("⚠️ No slots found in the database.");
+            console.log("No slots found in the database.");
             return res.render("mains/parking-slot", { slots: [] });
         }
 
@@ -239,7 +243,7 @@ app.get("/slot", async (req, res) => {
 app.get("/parking-slot", async (req, res) => {
     try {
         const slots = await Slot.find(); // Fetch all slots from MongoDB
-        console.log("📌 Slots Data:", slots); // Debugging log
+        // console.log("📌 Slots Data:", slots); // Debugging log
 
         if (!slots || slots.length === 0) {
             console.log("⚠️ No slots found in the database.");

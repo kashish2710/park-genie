@@ -8,6 +8,7 @@
 </head>
 <body>
     <h2>Scan to Pay</h2>
+    <p>Your parking slot is <%= slotNumber %> </p>
     <img src="<%= qrCodeDataUrl %>" alt="QR Code" style="width:200px; height:200px;">
 
     <form action="/confirm-payment" method="POST">

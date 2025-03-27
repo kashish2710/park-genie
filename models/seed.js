@@ -20,6 +20,16 @@ const seedSlots = async () => {
             { slotNumber: "A17", isBooked: false },
             { slotNumber: "A18", isBooked: true },
             { slotNumber: "A19", isBooked: false },
+            { slotNumber: "A20", isBooked: true },
+            { slotNumber: "A11", isBooked: false },
+            { slotNumber: "A12", isBooked: false },
+            { slotNumber: "A13", isBooked: false }, 
+            { slotNumber: "A14", isBooked: false },
+            { slotNumber: "A15", isBooked: false },
+            { slotNumber: "A16", isBooked: true }, 
+            { slotNumber: "A17", isBooked: false },
+            { slotNumber: "A18", isBooked: true },
+            { slotNumber: "A19", isBooked: false },
             { slotNumber: "A20", isBooked: true }
         ];
 

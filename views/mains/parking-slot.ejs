@@ -213,7 +213,9 @@
                             <button type="submit" class="book-btn">Book</button>
                         </form>
                     <% } else { %>
-                        <button class="check-btn">Check</button>
+                        <form action="/check-slot" method="POST">
+                            <button class="check-btn">Check</button>
+                        </form>
                     <% } %>
                 </div>
             <% }); %>
