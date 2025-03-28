@@ -1,4 +1,4 @@
-<!-- views/mains/payment.ejs -->
+<!-- views/mains/payment.ejs
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,5 +15,40 @@
         <input type="hidden" name="slotNumber" value="<%= slotNumber %>">
         <button type="submit">Confirm Payment</button>
     </form>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="/css/payment.css">
+
+</head>
+<body>
+    <div class="container">
+        <h2>Scan to Pay</h2>
+        <p>You are paying for slot <%= slotNumber %></p>
+        <img src="<%= qrCodeDataUrl %>" alt="QR Code">
+
+        
+            <input type="hidden" name="slotNumber" value="<%= slotNumber %>">
+            <div id="pink">
+            <input type="text" name="name" placeholder="Enter Your Name" required>
+            <input type="email" name="email" placeholder="Enter Your Email" required>
+            <form action="/confirm-payment" method="POST">
+                <input type="hidden" name="slotNumber" value="<%= slotNumber %>">
+                <button type="submit">Confirm Payment</button>
+            </form>
+            </div>
+          
+          
+       
+
+        <a href="/" class="back-link" style="display: block;">← Back to Home</a>
+    
+    </div>
 </body>
 </html>

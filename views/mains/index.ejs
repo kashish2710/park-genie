@@ -19,7 +19,7 @@
                 <h2>Enter Details </h2>
                 <i class="fa-solid fa-user"></i>
                 <form action="/payment" method="POST">
-                    <input type="hidden" name="slotNumber" value="<%= slotNumber %>">
+                    <input type="hidden" name="slotNumber" value="<%= slotNumber || '' %>">
                     <label value="Name"></label>
                     <input type="text" name="name" placeholder="Name" required>
                     <br>

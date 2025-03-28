@@ -10,6 +10,9 @@ const cors = require("cors");
 const QRCode = require("qrcode");
 const Slot = require("./models/slot");
 const session = require("express-session");
+const { PythonShell } = require("python-shell");
+const { spawn } = require("child_process");
+
 app.use(session({
     secret: "yourSecretKey",
     resave: false,
@@ -36,7 +39,7 @@ app.engine("ejs", ejsmate);
 
 // **🔹 Connect to MongoDB**
 mongoose
-  .connect("mongodb://127.0.0.1:27017/park-genie", {
+  .connect("mongodb+srv://vanipandey2502:1kKJya7fVwOxKj66@park-genie.33ebflp.mongodb.net/?retryWrites=true&w=majority&appName=park-genie", {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
@@ -158,7 +161,7 @@ app.post("/index", async (req, res) => {
 
 // **🔹 Render Home Page**
 app.get("/", (req, res) => {
-    res.render("mains/index.ejs");
+    res.render("mains/firstpg.ejs");
 });
 app.get("/predict", (req, res) => {
     res.render("mains/predict");
@@ -172,11 +175,11 @@ app.get("/index", (req, res) => {
 
 app.get("/payment", async (req, res) => {
     try {
-        const slotNumber = req.session.slotNumber || "Unknown"; // Retrieve stored slotNumber
+        const slotNumber = req.query.slotNumber || req.session.slotNumber || "Unknown"; // Read from query first
         
         // Generate a QR code (Example: Payment URL or Slot Information)
-        const qrData = `Payment for Slot: ${slotNumber}`; // Change this as needed
-        const qrCodeDataUrl = await QRCode.toDataURL(qrData); 
+        const qrData = `Payment for Slot: ${slotNumber}`;
+        const qrCodeDataUrl = await QRCode.toDataURL(qrData);
 
         res.render("mains/payment", { slotNumber, qrCodeDataUrl }); // Pass slotNumber & QR code
     } catch (error) {
@@ -195,7 +198,8 @@ app.post("/payment", async (req, res) => {
         await newUser.save();
 
         // Redirect to payment page
-        res.redirect("/payment?generateQR=true");
+        res.redirect(`/payment?generateQR=true&slotNumber=${slotNumber}`);
+
     } catch (err) {
         res.status(400).send("❌ Error: " + err.message);
     }
@@ -207,7 +211,7 @@ app.post("/confirm-payment", async (req, res) => {
     try {
         const slot = await Slot.findOneAndUpdate(
             { slotNumber, isBooked: false },  // Only update if not booked
-            { $set: { isBooked: true, bookingTime: new Date() } },
+            { $set: { isBooked: true, bookingTime: new Date((new Date()).toLocaleString("en-US", { timeZone: "Asia/Kolkata" })) } },
             { new: true }  // Return updated document
         );
 
@@ -256,6 +260,162 @@ app.get("/parking-slot", async (req, res) => {
     }
 });
 
+
+// app.post("/check-slot", async (req, res) => {
+//     const { slotNumber } = req.body;
+//     const slot = await Slot.findOne({ slotNumber });
+
+//     if (!slot) {
+//         console.log("❌ Slot not found!");
+//         return res.render("mains/check", {
+//             slotNumber,
+//             bookingTime: "Not found",
+//             day: "Not found",
+//             date: "Not found",
+//             predictedExitTime: "Not found",
+//             timeLeft: "Not available"
+//         });
+//     }
+
+//     // Ensure bookingTime is valid
+//     if (!slot.bookingTime || !(slot.bookingTime instanceof Date)) {
+//         console.error("❌ Error: bookingTime is invalid.");
+//         return res.status(500).send("Error: Invalid booking time.");
+//     }
+
+//     const bookingTimestamp = slot.bookingTime.toISOString();
+//     console.log("⏳ Running Python script with timestamp:", bookingTimestamp);
+
+//     const pythonProcess = spawn("python3", ["predict.py", bookingTimestamp]);
+
+//     let outputData = "";
+//     let errorData = "";
+
+//     pythonProcess.stdout.on("data", (data) => {
+//         outputData += data.toString().trim();
+//     });
+
+//     pythonProcess.stderr.on("data", (data) => {
+//         errorData += data.toString();
+//     });
+
+//     pythonProcess.on("close", async (code) => {
+//         if (code !== 0) {
+//             console.error(`❌ Python script exited with error: ${errorData}`);
+//             return res.status(500).send("Error predicting exit time");
+//         }
+
+//         console.log("✅ Python script executed successfully. Output:", outputData);
+
+//         // Validate and convert output
+//         const predictedExitTimeStr = outputData.trim();
+//         console.log("🕒 Parsed exit time string:", predictedExitTimeStr);
+
+//         if (!predictedExitTimeStr || isNaN(Date.parse(predictedExitTimeStr))) {
+//             console.error("❌ Invalid exit time format from Python!");
+//             return res.status(500).send("Error: Invalid exit time received.");
+//         }
+
+//         const predictedExitTime = new Date(predictedExitTimeStr);
+//         console.log("📅 Parsed JavaScript Date object:", predictedExitTime);
+
+//         // Calculate time left
+//         const now = new Date();
+//         const timeDiffMs = predictedExitTime - now;
+
+//         let timeLeft = "Expired";
+//         if (timeDiffMs > 0) {
+//             const minutesLeft = Math.floor(timeDiffMs / 60000);
+//             const hours = Math.floor(minutesLeft / 60);
+//             const minutes = minutesLeft % 60;
+//             timeLeft = `${hours}h ${minutes}m left`;
+//         }
+
+//         // Update database
+//         slot.predictedExitTime = predictedExitTime;
+//         await slot.save();
+
+//         // Render the check page
+//         res.render("mains/check", {
+//             slotNumber,
+//             bookingTime: slot.bookingTime.toLocaleTimeString(),
+//             day: slot.bookingTime.toLocaleDateString(),
+//             date: slot.bookingTime.toLocaleDateString(),
+//             predictedExitTime: predictedExitTime.toLocaleString(),
+//             timeLeft
+//         });
+//     });
+// });
+app.post("/check-slot", async (req, res) => {
+    const { slotNumber } = req.body;
+    const slot = await Slot.findOne({ slotNumber });
+
+    if (!slot) {
+        return res.json({ success: false, message: "Slot not found" });
+    }
+
+    if (!slot.bookingTime || !(slot.bookingTime instanceof Date)) {
+        return res.status(500).json({ success: false, message: "Invalid booking time" });
+    }
+
+    const bookingTimestamp = slot.bookingTime.toISOString();
+    // console.log("⏳ Running Python script with timestamp:", bookingTimestamp);
+
+    const pythonProcess = spawn("python3", ["predict.py", bookingTimestamp]);
+
+    let outputData = "";
+    let errorData = "";
+
+    pythonProcess.stdout.on("data", (data) => {
+        outputData += data.toString().trim();
+    });
+
+    pythonProcess.stderr.on("data", (data) => {
+        errorData += data.toString();
+    });
+
+    pythonProcess.on("close", async (code) => {
+        if (code !== 0) {
+            return res.status(500).json({ success: false, message: "Error predicting exit time" });
+        }
+
+        const predictedExitTimeStr = outputData.trim();
+        if (!predictedExitTimeStr || isNaN(Date.parse(predictedExitTimeStr))) {
+            return res.status(500).json({ success: false, message: "Invalid exit time format" });
+        }
+
+        const predictedExitTime = new Date(predictedExitTimeStr);
+        const now = new Date();
+        const timeDiffMs = predictedExitTime - now;
+
+        let timeLeft = "Expired";
+        if (timeDiffMs > 0) {
+            const minutesLeft = Math.floor(timeDiffMs / 60000);
+            const hours = Math.floor(minutesLeft / 60);
+            const minutes = minutesLeft % 60;
+            timeLeft = `${hours}h ${minutes}m left`;
+        }
+
+        slot.predictedExitTime = predictedExitTime;
+        await slot.save();
+
+        return res.json({
+            success: true,
+            slotNumber,
+            timeLeft
+        });
+    });
+});
+
+app.get("/available-slots", async (req, res) => {
+    try {
+        const availableSlots = await Slot.countDocuments({ isBooked: 0 }); // Count slots that are not booked
+        res.json({ availableSlots });
+    } catch (error) {
+        console.error("❌ Error fetching available slots:", error);
+        res.status(500).json({ error: "Error fetching available slots" });
+    }
+});
 
 // **🔹 Start Server**
 const PORT = 8080;
