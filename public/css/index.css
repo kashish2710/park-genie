@@ -5,7 +5,10 @@ body {
     text-align: center;
     align-items: center;
     /* height: 100vh; */
-    background-color: #f8f4f0;
+    /* background-color: rgb(255, 216, 222,0.5); */
+    background-image: url("/images/parking2.png");
+     background-size: cover;
+  
     font-family: Arial, sans-serif;
 }
 
@@ -14,7 +17,7 @@ body {
     height:400px;
     display: flex;
     width: 600px;
-    background: #fff;
+    background: #ffffff;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
@@ -28,7 +31,7 @@ body {
     width: 40%;
     /* background-color: #615c5f; */
     /* opacity: 0.5;  */
-    background: #f8aeb1;
+    background: rgb(248, 174, 177);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,15 +41,15 @@ body {
 
 .logo-section img {
     width: 190px;
-    height:150px;
-    border-radius: 15px;
-    
+    height:190px;
+    border-radius: 30%;
+    box-shadow: 0 0 13px palevioletred;
 }
 
 .form-section {
     width: 60%;
     padding: 20px;
-    background: #fdfaf6;
+    background: #ffffff;
     text-align: center;
     padding-top:40px;
 }
@@ -77,14 +80,14 @@ form input {
     margin: 10px;
 }
 
-.input-box i {
+/* .input-box i {
     position: absolute;
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
     color: #666;
     font-size: 18px;
-}
+} */
 button{
     margin-top: 20px;
     width:200px;
@@ -99,7 +102,131 @@ button:hover{
     background-color: #fda1a6;
     border: solid 1px black;
 }
-#heading{
-    color: #ff848a;
+/* #heading{
+    color: #000000;
    
+} */
+/* #heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #e3e3e3;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    display: inline-block;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+} */
+  
+#heading {
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #fff;
+    padding: 20px 40px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    display: inline-block;
+    margin: 20px auto;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    text-shadow: 2px 2px 10px rgba(255, 117, 140, 0.6);
+    animation: swing 3s infinite ease-in-out;
+}
+@keyframes swing {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(3deg); }
+    50% { transform: rotate(-3deg); }
+    75% { transform: rotate(2deg); }
+    100% { transform: rotate(0deg); }
+}
+#heading::before, #heading::after {
+    content: "";
+    position: absolute;
+    top: -36px;
+    width: 10px;
+    height: 55px;
+    background: black;
+    border-radius: 5px;
+}
+#heading::before {
+    left: 15%;
+}
+#heading::after {
+    right: 15%;
+}
+
+#hanging-line {
+    width: 2px;
+    height: 30px;
+    background: black;
+    position: absolute;
+    left: 50%;
+    top: -30px;
+    transform: translateX(-50%);
+}
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0;
+}
+.input-container input {
+    width: 100%;
+    padding-right: 30px;
+}
+.input-container i {
+    position: absolute;
+    right:20px;
+    color:  #ff848a;
+}
+button {
+    text-align: center;
+    background: linear-gradient(45deg, #ff758c, #ff7eb3);
+    color: white;
+    border: none;
+    /* padding: 12px 20px; */
+    font-size: 1.2rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #ff7eb3, #ff758c);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Form Section Background */
+.form-section {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+    padding: 20px;
+    /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); */
+}
+
+/* Page Fade-in Effect */
+.container {
+    background-color: #ffffff;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
