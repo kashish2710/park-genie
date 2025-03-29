@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,32 +8,45 @@
     <link rel="stylesheet" href="/css/index.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
 </head>
 <body>
     <div id="main">
-        <h1 id="heading">Reserve your slot with park-genie </h1>
+        <div id="hanging-line"></div>
+        <h1 id="heading">Reserve your slot with park-genie</h1>
         <div class="container">
             <div class="logo-section">
                 <img src="/images/logo.png" alt="Logo">
             </div>
             <div class="form-section">
-                <h2>Enter Details </h2>
-                <i class="fa-solid fa-user"></i>
+                <h2>Enter Details</h2>
+                
                 <form action="/payment" method="POST">
                     <input type="hidden" name="slotNumber" value="<%= slotNumber || '' %>">
-                    <label value="Name"></label>
-                    <input type="text" name="name" placeholder="Name" required>
-                    <br>
-                    <label value="Phone"></label>
-                    <input type="text" name="phone" placeholder="Phone" required>
-                    <br>
-                    <label value="carNumber"></label>
-                    <input type="text" name="carNumber" placeholder="Car Number "  required>
-                    <button type="submit">Proceed to Payment</button>
+                    
+                    <div class="input-container">
+                        <input type="text" id="name" name="name" placeholder="Name" required>
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                  
+                    
+                    <div class="input-container">
+                        <input type="text" id="phone" name="phone" placeholder="Phone" required>
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                  
+                    
+                    <div class="input-container">
+                        <input type="text" id="carNumber" name="carNumber" placeholder="Car Number" required>
+                        <i class="fa-solid fa-car"></i>
+                    </div>
+                   
+                    
+                    <button type="submit">Proceed to Pay</button>
                 </form>
-                
             </div>
         </div>
     </div>
 </body>
-</html>
+</html> 
+
