@@ -4,13 +4,19 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 import joblib
 
-# Sample dataset (replace with actual data)
 data = {
-    'booking_hour': [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
-    'day_of_week': [0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4],
-    'duration': [120, 150, 90, 110, 140, 100, 130, 180, 160, 200, 170, 140]
+    'booking_hour': [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                     8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19,
+                     8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+    
+    'day_of_week': [0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4,
+                    5, 6, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2,
+                    3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 0],
+    
+    'duration': [120, 150, 90, 110, 140, 100, 130, 180, 160, 200, 170, 140,
+                 115, 135, 95, 105, 145, 125, 140, 175, 155, 195, 165, 135,
+                 110, 140, 85, 120, 150, 130, 125, 185, 170, 210, 180, 150],
 }
-
 df = pd.DataFrame(data)
 
 # Define features & target

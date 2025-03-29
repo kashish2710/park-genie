@@ -77,7 +77,7 @@
     
     <header>
         <!-- <img src="logo.png.jpg" > -->
-        <h1 style="margin-top: 0; font-size: 40px;" class="glow">Park Genie</h1>
+        <h1 style="margin-top: 0; font-size: 40px;" class="glow" >Park Genie</h1>
         <nav>
             <ul>
                 <li><a href="#slots">Available Slots</a></li>
@@ -138,7 +138,7 @@ Let me know if you need this refined further. </p> -->
             fetch("/available-slots") 
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById("slot-info").innerHTML = `Available slots: ${data.availableSlots} `;
+                    document.getElementById("slot-info").innerHTML = `Available slots: ${data.availableSlots}/${data.totalSlots}`;
                 })
                 .catch(error => {
                     console.error("❌ Error fetching available slots:", error);

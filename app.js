@@ -37,6 +37,9 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
 app.engine("ejs", ejsmate);
 
+function convertUTCtoIST(utcDate) {
+    return new Date(new Date(utcDate).toLocaleString("en-US", { timeZone: "Asia/Kolkata" }));
+}
 // **🔹 Connect to MongoDB**
 mongoose
   .connect("mongodb+srv://vanipandey2502:1kKJya7fVwOxKj66@park-genie.33ebflp.mongodb.net/?retryWrites=true&w=majority&appName=park-genie", {
@@ -209,14 +212,21 @@ app.post("/confirm-payment", async (req, res) => {
     const { slotNumber } = req.body;
 
     try {
+        const bookingTime = new Date();
+
         const slot = await Slot.findOneAndUpdate(
-            { slotNumber, isBooked: false },  // Only update if not booked
-            { $set: { isBooked: true, bookingTime: new Date((new Date()).toLocaleString("en-US", { timeZone: "Asia/Kolkata" })) } },
+            { slotNumber, isBooked: false },  
+            { 
+                $set: { 
+                    isBooked: true, 
+                    bookingTime: bookingTime 
+                } 
+            },
             { new: true }  // Return updated document
         );
 
         if (slot) {
-            console.log(`✅ Slot ${slotNumber} successfully booked at ${slot.bookingTime}`);
+            // console.log(`✅ Slot ${slotNumber} successfully booked at ${bookingTimeIST}`);
             res.redirect("/parking-slot");  // Redirect after booking
         } else {
             console.log(`❌ Slot ${slotNumber} is already booked!`);
@@ -228,7 +238,6 @@ app.post("/confirm-payment", async (req, res) => {
         res.status(500).send("❌ Error updating slot booking status.");
     }
 });
-
 
 app.get("/slot", async (req, res) => {
     try {
@@ -361,8 +370,8 @@ app.post("/check-slot", async (req, res) => {
     const bookingTimestamp = slot.bookingTime.toISOString();
     // console.log("⏳ Running Python script with timestamp:", bookingTimestamp);
 
-    const pythonProcess = spawn("python3", ["predict.py", bookingTimestamp]);
-
+    // const pythonProcess = spawn("python3", ["predict.py", bookingTimestamp]);
+    const pythonProcess = spawn(process.platform === "win32" ? "python" : "python3", ["predict.py", bookingTimestamp]);
     let outputData = "";
     let errorData = "";
 
@@ -380,13 +389,14 @@ app.post("/check-slot", async (req, res) => {
         }
 
         const predictedExitTimeStr = outputData.trim();
-        if (!predictedExitTimeStr || isNaN(Date.parse(predictedExitTimeStr))) {
+        const predictedExitTime = new Date(predictedExitTimeStr + "Z"); // Ensure UTC
+        if (!predictedExitTimeStr || isNaN(predictedExitTime.getTime())) {
             return res.status(500).json({ success: false, message: "Invalid exit time format" });
         }
 
-        const predictedExitTime = new Date(predictedExitTimeStr);
-        const now = new Date();
+        const now = new Date(new Date().toISOString());
         const timeDiffMs = predictedExitTime - now;
+
 
         let timeLeft = "Expired";
         if (timeDiffMs > 0) {
@@ -398,6 +408,10 @@ app.post("/check-slot", async (req, res) => {
 
         slot.predictedExitTime = predictedExitTime;
         await slot.save();
+        console.log(`📌 Booking Time (DB): ${slot.bookingTime.toISOString()}`);
+        console.log(`🔮 Predicted Exit Time (Raw): ${predictedExitTimeStr}`);
+        console.log(`⏳ Predicted Exit Time (Parsed): ${predictedExitTime.toISOString()}`);
+        console.log(`⏰ Current Time (UTC): ${now.toISOString()}`);
 
         return res.json({
             success: true,
@@ -410,7 +424,8 @@ app.post("/check-slot", async (req, res) => {
 app.get("/available-slots", async (req, res) => {
     try {
         const availableSlots = await Slot.countDocuments({ isBooked: 0 }); // Count slots that are not booked
-        res.json({ availableSlots });
+        const totalSlots= await Slot.countDocuments();
+        res.json({ availableSlots ,totalSlots });
     } catch (error) {
         console.error("❌ Error fetching available slots:", error);
         res.status(500).json({ error: "Error fetching available slots" });

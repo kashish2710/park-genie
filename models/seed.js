@@ -18,19 +18,19 @@ const seedSlots = async () => {
             { slotNumber: "A05", isBooked: false },
             { slotNumber: "A06", isBooked: false  }, 
             { slotNumber: "A07", isBooked: false },
-            { slotNumber: "A08", isBooked: true },
+            { slotNumber: "A08", isBooked: false },
             { slotNumber: "A09", isBooked: false },
-            { slotNumber: "A10", isBooked: true },
+            { slotNumber: "A10", isBooked: false },
             { slotNumber: "A11", isBooked: false },
             { slotNumber: "A12", isBooked: false },
             { slotNumber: "A13", isBooked: false }, 
             { slotNumber: "A14", isBooked: false },
             { slotNumber: "A15", isBooked: false },
-            { slotNumber: "A16", isBooked: false  }, 
+            { slotNumber: "A16", isBooked: false }, 
             { slotNumber: "A17", isBooked: false },
             { slotNumber: "A18", isBooked: false },
             { slotNumber: "A19", isBooked: false },
-            { slotNumber: "A20", isBooked: false  }
+            { slotNumber: "A20", isBooked: false }
         ];
 
         await Slot.insertMany(slots);
