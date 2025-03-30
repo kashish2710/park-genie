@@ -63,28 +63,43 @@ Flask – Serves ML predictions via API
 ## **Setup Instructions**
 
 ### 1. Clone the Repository
+
    git clone https://github.com/kashish2710/park-genie.git
+   
    cd park-genie
 
 ### 2. Set up virtual environment
+
    python3 -m venv venv
+   
    source venv/bin/activate  # On macOS/Linux
+   
    venv\Scripts\activate  # On Windows
 
 ### 3. Install Dependencies
    For Node.js Backend:
+   
    npm install express path ejs-mate mongoose body-parser dotenv axios cors qrcode express-session python-shell child_process
+
+   
    For Python ML Model:
+   
    pip install pandas flask joblib scikit-learn
 
 ### 4. Setup Environment Variables
+
    Create a .env file in the root directory and add:
+
    MONGO_URI=your_mongodb_connection_string
+   
    SESSION_SECRET=your_secret_key
 
 ### 5. Run the Application
+
    Start the Backend Server
+   
    node app.js
+   
    Server will be available at: http://localhost:8080
 
 
