@@ -4,13 +4,13 @@ const userSchema = new mongoose.Schema({
   phone:  { 
     type: String, 
     required: true, 
-    match: [/^\d{10}$/, "Phone number must be 10 digits"] // Validates a 10-digit number
+    match: [/^\d{10}$/, "Phone number must be 10 digits"] 
   },
   carNumber:String
 });
 
 
-const uri = "mongodb+srv://vanipandey2502:1kKJya7fVwOxKj66@park-genie.33ebflp.mongodb.net/?retryWrites=true&w=majority&appName=park-genie";
+const uri = "process.env.MONGO_URI";
 
 // Connect to MongoDB
 mongoose.connect(uri, {
