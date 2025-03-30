@@ -86,15 +86,8 @@ Flask – Serves ML predictions via API
    
    pip install pandas flask joblib scikit-learn
 
-### 4. Setup Environment Variables
 
-   Create a .env file in the root directory and add:
-
-   MONGO_URI=your_mongodb_connection_string
-   
-   SESSION_SECRET=your_secret_key
-
-### 5. Run the Application
+### 4. Run the Application
 
    Start the Backend Server
    
