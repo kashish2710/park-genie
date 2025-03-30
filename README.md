@@ -7,34 +7,57 @@ Park Genie is a smart parking management system that enables users to find, book
 ## **Features:**
 
 Real-time Parking Slot Availability: View available slots before arriving.
+
 QR Code-based Booking System: Users receive a QR code for payment confirmation.
+
 Machine Learning Predictions: Predicts when a slot will be free based on past data.
+
 Session-based Slot Reservation: Ensures seamless user experience.
+
 MongoDB Integration: Stores user and slot data efficiently.
 
 ## **Dependencies**
 
 Backend (Node.js + Express)
+
 Node.js 18+
+
 Express – Web framework
+
 Path – Built-in Node.js module for handling file paths
+
 EJS-Mate – Layout engine for EJS templates
+
 Mongoose – MongoDB ODM
+
 Body-parser – Middleware to parse incoming request bodies
+
 Dotenv – Loads environment variables
+
 Axios – HTTP client for API requests
+
 CORS – Middleware for cross-origin requests
+
 QRCode – Generates QR codes
+
 Express-session – Manages user sessions
+
 Python-shell – Runs Python scripts from Node.js
+
 Child_process – Spawns and manages system processes
 
 Machine Learning Model (Python)
+
 Python 3.9+
+
 Pandas – Data manipulation
+
 NumPy – Numerical computing
+
 Scikit-learn – ML model implementation
+
 Joblib – Saves and loads ML models
+
 Flask – Serves ML predictions via API
 
 ## **Setup Instructions**
