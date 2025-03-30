@@ -44,7 +44,7 @@ if (!mongoose.connection.readyState) {
       .then(() => console.log("Connected to MongoDB Atlas"))
       .catch((err) => console.error("MongoDB Connection Error:", err));
   } else {
-    console.log("⚠️ MongoDB connection already established.");
+    console.log("MongoDB connection already established.");
   }
 
 app.get("/", (req, res) => {
@@ -56,7 +56,7 @@ app.get("/parking-slot", async (req, res) => {
         const slots = await Slot.find(); // Fetch all slots from MongoDB
 
         if (!slots || slots.length === 0) {
-            console.log("⚠️ No slots found in the database.");
+            console.log("No slots found in the database.");
             return res.render("mains/parking-slot", { slots: [] }); // Send empty array if no slots
         }
         res.render("mains/parking-slot", { slots }); // Pass slots to EJS
@@ -115,13 +115,13 @@ app.post("/confirm-payment", async (req, res) => {
         if (slot) {
             res.redirect("/parking-slot");  // Redirect after booking
         } else {
-            console.log(`❌ Slot ${slotNumber} is already booked!`);
-            res.status(400).send("❌ Slot is already booked.");
+            console.log(`Slot ${slotNumber} is already booked!`);
+            res.status(400).send("Slot is already booked.");
         }
 
     } catch (err) {
-        console.error("❌ Error updating slot:", err);
-        res.status(500).send("❌ Error updating slot booking status.");
+        console.error("Error updating slot:", err);
+        res.status(500).send("Error updating slot booking status.");
     }
 });
 
@@ -221,5 +221,5 @@ app.get("/available-slots", async (req, res) => {
 
 const PORT = 8080;
 app.listen(PORT, () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
+    console.log(`Server running at http://localhost:${PORT}`);
 });
