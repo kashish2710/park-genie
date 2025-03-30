@@ -20,7 +20,7 @@ MongoDB Integration: Stores user and slot data efficiently.
 
 Backend (Node.js + Express)
 
-Node.js 18+
+### Node.js 18+
 
 Express – Web framework
 
@@ -46,7 +46,7 @@ Python-shell – Runs Python scripts from Node.js
 
 Child_process – Spawns and manages system processes
 
-Machine Learning Model (Python)
+### Machine Learning Model (Python)
 
 Python 3.9+
 
