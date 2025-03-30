@@ -18,9 +18,9 @@ MongoDB Integration: Stores user and slot data efficiently.
 
 ## **Dependencies**
 
-Backend (Node.js + Express)
+### Backend (Node.js + Express)
 
-### Node.js 18+
+Node.js 18+
 
 Express – Web framework
 
@@ -62,27 +62,27 @@ Flask – Serves ML predictions via API
 
 ## **Setup Instructions**
 
-1. Clone the Repository
+### 1. Clone the Repository
    git clone https://github.com/kashish2710/park-genie.git
    cd park-genie
 
-2. Set up virtual environment
+### 2. Set up virtual environment
    python3 -m venv venv
    source venv/bin/activate  # On macOS/Linux
    venv\Scripts\activate  # On Windows
 
-3. Install Dependencies
+### 3. Install Dependencies
    For Node.js Backend:
    npm install express path ejs-mate mongoose body-parser dotenv axios cors qrcode express-session python-shell child_process
    For Python ML Model:
    pip install pandas flask joblib scikit-learn
 
-4. Setup Environment Variables
+### 4. Setup Environment Variables
    Create a .env file in the root directory and add:
    MONGO_URI=your_mongodb_connection_string
    SESSION_SECRET=your_secret_key
 
-5. Run the Application
+### 5. Run the Application
    Start the Backend Server
    node app.js
    Server will be available at: http://localhost:8080
@@ -91,17 +91,25 @@ Flask – Serves ML predictions via API
 ## **API Endpoints**
 
 GET / → View the front Page.
+
 GET /parking-slot → View all parking slots.
+
 GET /available-slots → Returns the number of available slots.
+
 POST /confirm-payment → Confirms slot payment and updates availability.
+
 POST /next → Stores selected slot in session.
+
 POST /payment → Registers user details and generates QR Code.
+
 POST /check-slot → Predicts when a slot will be free.
 
 ## **Future Enhancements**
 
 Integration with IoT sensors for real-time occupancy updates.
+
 Implementing automated payments.
+
 Enhancing ML predictions with more data points.
 
 ## **License**
