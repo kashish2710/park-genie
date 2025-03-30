@@ -1,10 +1,10 @@
 # **Park Genie**
 
-#**Project Overview**
+## **Project Overview**
 
 Park Genie is a smart parking management system that enables users to find, book, and predict parking slot availability. The system integrates Node.js (Express.js), MongoDB, and Python (Machine Learning) to optimize parking slot usage and provide real-time availability and predictions based on historical data.
 
-**Features:**
+## **Features:**
 
 Real-time Parking Slot Availability: View available slots before arriving.
 QR Code-based Booking System: Users receive a QR code for payment confirmation.
@@ -12,7 +12,7 @@ Machine Learning Predictions: Predicts when a slot will be free based on past da
 Session-based Slot Reservation: Ensures seamless user experience.
 MongoDB Integration: Stores user and slot data efficiently.
 
-**Dependencies**
+## **Dependencies**
 
 Backend (Node.js + Express)
 Node.js 18+
@@ -37,7 +37,7 @@ Scikit-learn – ML model implementation
 Joblib – Saves and loads ML models
 Flask – Serves ML predictions via API
 
-**Setup Instructions**
+## **Setup Instructions**
 
 1. Clone the Repository
    git clone https://github.com/kashish2710/park-genie.git
@@ -65,7 +65,7 @@ Flask – Serves ML predictions via API
    Server will be available at: http://localhost:8080
 
 
-**API Endpoints**
+## **API Endpoints**
 
 GET / → View the front Page.
 GET /parking-slot → View all parking slots.
@@ -75,21 +75,21 @@ POST /next → Stores selected slot in session.
 POST /payment → Registers user details and generates QR Code.
 POST /check-slot → Predicts when a slot will be free.
 
-**Future Enhancements**
+## **Future Enhancements**
 
 Integration with IoT sensors for real-time occupancy updates.
 Implementing automated payments.
 Enhancing ML predictions with more data points.
 
-**License**
+## **License**
 
 This project is licensed under the MIT License.
 
-**Contributing**
+## **Contributing**
 
 If you want to contribute please feel free to fork this repo and submit a pull request.
 
-**Contact**
+## **Contact**
 
 For any queries, reach out to the project maintainers.
 
