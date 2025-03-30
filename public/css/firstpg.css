@@ -3,18 +3,13 @@ body {
     margin: 0;
     padding: 0;
     background-image: url("/images/park.jpg");
-    /* background-size: cover; */
     text-align: center;
 }
 header {
-    /* position: static; */
     border-bottom-right-radius: 50px;
     border-bottom-left-radius: 50px;
-    /* border-radius: 10px solid;
-    border-bottom: #ff4da6; */
     background-color: rgb(0, 0, 0,0.6);
     color: rgb(255, 255, 255);
-    /* opacity:0.4; */
     padding: 15px 0;
 }
 nav ul {
@@ -41,7 +36,6 @@ section {
     width: 80%;
     border-radius: 10px;
     box-shadow: 1px 1px 15px rgb(208, 140, 183);
-    /* opacity:0.7; */
     transition: 1s all ease-in-out;
 }
 section:hover{
@@ -65,7 +59,6 @@ button:hover {
 img{
     height:10vh;
     margin-right:65vw;
-    /* margin-top:-70px; */
     width:10vw;
 }
 .glow {

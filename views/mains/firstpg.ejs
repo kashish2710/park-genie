@@ -5,78 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Park Genie</title>
     <link rel="stylesheet" href="/css/firstpg.css">
-    <!-- <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-image: url("/css/park.jpg");
-            /* background-size: cover; */
-            text-align: center;
-        }
-        header {
-            background-color: pink;
-            color: rgb(255, 255, 255);
-            /* opacity:0.4; */
-            padding: 15px 0;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-        nav ul li:hover{
-            text-decoration: underline;
-           
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 18px;
-        }
-        section {
-            margin: 50px auto;
-            padding: 20px;
-            background: rgb(255, 255, 255,0.6);
-            width: 80%;
-            border-radius: 10px;
-            box-shadow: 0 0 4px rgba(255, 255, 255);
-            /* opacity:0.7; */
-            transition: 1s all ease-in-out;
-        }
-        section:hover{
-            transform: scale(1.1);
-            box-shadow: 0 0 7px(white);
-        }
-        button {
-            background-color: rgb(252, 177, 189);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        button:hover {
-            border:1px solid black;
-            background-color: rgb(255, 173, 187);
-        }
-        img{
-            height:10vh;
-            margin-right:65vw;
-            /* margin-top:-70px; */
-            width:10vw;
-        }
-    </style> -->
 </head>
 <body>
     
     <header>
-        <!-- <img src="logo.png.jpg" > -->
         <h1 style="margin-top: 0; font-size: 40px;" class="glow">Park Genie</h1>
         <nav>
             <ul>
@@ -103,24 +35,6 @@
     <section id="about">
         <h2>About Us</h2>
         <p>Park Genie helps you find real-time available parking slots with AI-powered predictions.</p>
-        <!-- <p>Park Genie helps you find real-time available parking slots with AI-powered predictions.<br>
-
-With smart algorithms and IoT sensor integration.<br>
-
-Key Features:
-<br>
-Real-time Slot Availability – Know which slots are free before you arrive.
-<br>
-AI-Powered Predictions – Get an estimated exit time for occupied slots.
-<br>
-Seamless Booking & Payment – Reserve your spot and pay effortlessly.
-<br>
-User-Friendly Dashboard – Track your bookings and slot status easily.
-<br>
-
-Let Park Genie make your parking experience stress-free
-
-Let me know if you need this refined further. </p> -->
     </section>
     
     <section id="contact">
@@ -128,27 +42,6 @@ Let me know if you need this refined further. </p> -->
         <p>Email: support@parkgenie.com</p>
         <p>Phone: +123 456 7890</p>
     </section>
-    
-   
-    
-    <script>
-        function checkSlots() {
-            document.getElementById("slot-info").innerHTML = "Fetching available slots...";
-            
-            fetch("/available-slots") 
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("slot-info").innerHTML = `Available slots: ${data.availableSlots} `;
-                })
-                .catch(error => {
-                    console.error("❌ Error fetching available slots:", error);
-                    document.getElementById("slot-info").innerHTML = "Error fetching slots!";
-                });
-        }
-        
-        function bookSlot() {
-            window.location.href = "/parking-slot";
-        }        
-    </script>
+    <script src="/js/firstpg.js"></script>
 </body>
 </html>
