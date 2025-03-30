@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Slot = require("./slot");
 
-mongoose.connect("process.env.MONGO_URI", {
+mongoose.connect("mongodb+srv://vanipandey2502:1kKJya7fVwOxKj66@park-genie.33ebflp.mongodb.net/?retryWrites=true&w=majority&appName=park-genie", {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -34,10 +34,10 @@ const seedSlots = async () => {
         ];
 
         await Slot.insertMany(slots);
-        console.log("✅ Slots added successfully!");
+        console.log("Slots added successfully!");
         mongoose.connection.close();
     } catch (err) {
-        console.error("❌ Error seeding slots:", err);
+        console.error("Error seeding slots:", err);
         mongoose.connection.close();
     }
 };

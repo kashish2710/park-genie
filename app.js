@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -9,7 +10,7 @@ const QRCode = require("qrcode");
 const session = require("express-session");
 const { PythonShell } = require("python-shell");
 const { spawn } = require("child_process");
-require("dotenv").config();
+
 
 
 // Session Middleware: Stores user session data
@@ -37,15 +38,16 @@ app.engine("ejs", ejsmate);
 // Connect to MongoDB
 if (!mongoose.connection.readyState) {
     mongoose
-      .connect(process.env.MONGO_URI, {
+      .connect("mongodb+srv://vanipandey2502:1kKJya7fVwOxKj66@park-genie.33ebflp.mongodb.net/?retryWrites=true&w=majority&appName=park-genie", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       })
       .then(() => console.log("Connected to MongoDB Atlas"))
       .catch((err) => console.error("MongoDB Connection Error:", err));
   } else {
-    console.log("MongoDB connection already established.");
+    console.log("⚠️ MongoDB connection already established.");
   }
+
 
 app.get("/", (req, res) => {
     res.render("mains/firstpg.ejs");

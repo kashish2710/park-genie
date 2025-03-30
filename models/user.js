@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
 });
 
 
-const uri = "process.env.MONGO_URI";
+const uri = "mongodb+srv://vanipandey2502:1kKJya7fVwOxKj66@park-genie.33ebflp.mongodb.net/?retryWrites=true&w=majority&appName=park-genie";
 
 // Connect to MongoDB
 mongoose.connect(uri, {
