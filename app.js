@@ -45,12 +45,12 @@ if (!mongoose.connection.readyState) {
       .then(() => console.log("Connected to MongoDB Atlas"))
       .catch((err) => console.error("MongoDB Connection Error:", err));
   } else {
-    console.log("⚠️ MongoDB connection already established.");
+    console.log("MongoDB connection already established.");
   }
 
 
 app.get("/", (req, res) => {
-    res.render("mains/firstpg.ejs");
+    res.render("mains/index.ejs");
 });
 
 app.get("/parking-slot", async (req, res) => {
@@ -130,7 +130,7 @@ app.post("/confirm-payment", async (req, res) => {
 app.post("/next", (req, res) => {
     const { slotNumber } = req.body;
     req.session.slotNumber = slotNumber; // Store slotNumber in session
-    res.render("mains/index", { slotNumber }); // Pass slotNumber to index.ejs
+    res.render("mains/details", { slotNumber }); // Pass slotNumber to index.ejs
 });
 
 app.post("/payment", async (req, res) => {

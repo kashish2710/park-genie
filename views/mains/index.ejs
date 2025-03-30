@@ -1,53 +1,48 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Park Genie</title>
     <link rel="stylesheet" href="/css/index.css">
     <link rel="icon" href="/images/logo.png">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    
 </head>
 <body>
-    <div id="main">
-        <div id="hanging-line"></div>
-        <h1 id="heading">Reserve your slot with park-genie</h1>
-        <div class="container">
-            <div class="logo-section">
-                <img src="/images/logo.png" alt="Logo">
-            </div>
-            <div class="form-section">
-                <h2>Enter Details</h2>
+    
+    <header>
+        <h1 style="margin-top: 0; font-size: 40px;" class="glow">Park Genie</h1>
+        <nav>
+            <ul>
+                <li><a href="#slots">Available Slots</a></li>
+                <li><a href="#book">Book My Slot</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
                 
-                <form action="/payment" method="POST">
-                    <input type="hidden" name="slotNumber" value="<%= slotNumber || '' %>">
-                    
-                    <div class="input-container">
-                        <input type="text" id="name" name="name" placeholder="Name" required>
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                  
-                    
-                    <div class="input-container">
-                        <input type="text" id="phone" name="phone" placeholder="Phone" required>
-                        <i class="fa-solid fa-phone"></i>
-                    </div>
-                  
-                    
-                    <div class="input-container">
-                        <input type="text" id="carNumber" name="carNumber" placeholder="Car Number" required>
-                        <i class="fa-solid fa-car"></i>
-                    </div>
-                   
-                    
-                    <button type="submit">Proceed to Pay</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</body>
-</html> 
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="slots">
+        <h2>Check Available Slots</h2>
+        <button onclick="checkSlots()">Check Now</button>
+        <div id="slot-info"></div>
+    </section>
 
+    <section id="book">
+        <h2>Book Your Slot</h2>
+        <button onclick="bookSlot()">Book Now</button>
+    </section>
+    
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Park Genie helps you find real-time available parking slots with AI-powered predictions.</p>
+    </section>
+    
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Email: support@parkgenie.com</p>
+        <p>Phone: +123 456 7890</p>
+    </section>
+    <script src="/js/firstpg.js"></script>
+</body>
+</html>

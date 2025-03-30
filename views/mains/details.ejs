@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/details.css">
+    <link rel="icon" href="/images/logo.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+</head>
+<body>
+    <div id="main">
+        <div id="hanging-line"></div>
+        <h1 id="heading">Reserve your slot with park-genie</h1>
+        <div class="container">
+            <div class="logo-section">
+                <img src="/images/logo.png" alt="Logo">
+            </div>
+            <div class="form-section">
+                <h2>Enter Details</h2>
+                
+                <form action="/payment" method="POST">
+                    <input type="hidden" name="slotNumber" value="<%= slotNumber || '' %>">
+                    
+                    <div class="input-container">
+                        <input type="text" id="name" name="name" placeholder="Name" required>
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                  
+                    
+                    <div class="input-container">
+                        <input type="text" id="phone" name="phone" placeholder="Phone" required>
+                        <i class="fa-solid fa-phone"></i>
+                    </div>
+                  
+                    
+                    <div class="input-container">
+                        <input type="text" id="carNumber" name="carNumber" placeholder="Car Number" required>
+                        <i class="fa-solid fa-car"></i>
+                    </div>
+                   
+                    
+                    <button type="submit">Proceed to Pay</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
+
