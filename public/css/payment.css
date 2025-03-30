@@ -1,90 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fde2e4, #f8bbd0);
+            color: #6a1b9a;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* height: 100vh; */
+            margin: 0;
+            background: linear-gradient(135deg, #fce4ec, #ffd1dc, #e1bee7, #d81b60);
+    background-size: 400% 400%;
+    animation: gradientAnimation 6s ease-in-out infinite ;
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #fce4ec;
-    color: #6a1b9a;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
+        }
+        @keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    75%{background-position: 100% 50%;}
+    100% { background-position: 0% 50%; }
 }
 
-.container {
-    background: #fff;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-    max-width: 400px;
-    width: 90%;
-    text-align: center;
-   
-}
+        .container {
+            background: #fff;
+            padding: 30px;
+            /* border-radius: 20px; */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 420px;
+            width: 90%;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
 
-h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-}
+        h2 {
+            margin-top: 0;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-img {
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
+        .slot-number {
+            font-weight: bold;
+            color: #d81b60;
+        }
 
-#pink {
-    background: #f8bbd0;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+        .qr-container {
+            background: #f8bbd0;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
-input[type="text"], input[type="email"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #d81b60;
-    border-radius: 8px;
-    font-size: 1rem;
-    text-align: center;
-}
+        img {
+            width: 180px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
 
-button {
-    background-color: #d81b60;
-    color: #fff;
-    font-size: 1rem;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 10px;
-}
+        img:hover {
+            transform: scale(1.05);
+        }
 
-button:hover {
-    background-color: #ad1457;
-}
+        .payment-form {
+            background: #fff0f6;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-.back-link {
-    margin-top: 15px;
-    font-size: 1rem;
-    color: #d81b60;
-    text-decoration: none;
-    transition: 0.3s;
-}
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #d81b60;
+            border-radius: 8px;
+            font-size: 1rem;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s ease;
+        }
 
-.back-link:hover {
-    text-decoration: underline;
-    color: #ad1457;
-}
+        input[type="text"]:focus, input[type="email"]:focus {
+            border-color: #ad1457;
+            box-shadow: 0 0 12px rgba(216, 27, 96, 0.5);
+        }
+
+        button {
+            background: linear-gradient(135deg, #d81b60, #ad1457);
+            color: #fff;
+            font-size: 1rem;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #ad1457, #d81b60);
+            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.4);
+            transform: scale(1.05);
+        }
+
+
+
+        .spinner {
+            display: none;
+            margin-top: 15px;
+        }
+         

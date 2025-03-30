@@ -22,12 +22,16 @@ nav ul li {
 }
 nav ul li:hover{
     text-decoration: underline;
+    color: rgb(255, 0, 162);
    
 }
 nav a {
     color: white;
     text-decoration: none;
     font-size: 18px;
+}
+nav a:hover{
+    color: rgb(255, 0, 162);
 }
 section {
     margin: 50px auto;

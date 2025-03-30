@@ -3,28 +3,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/css/payment.css">
+    <link rel="icon" href="/images/logo.png">
 
 </head>
 <body>
     <div class="container">
-        <h2>Scan to Pay</h2>
-        <p>You are paying for slot <%= slotNumber %></p>
-        <img src="<%= qrCodeDataUrl %>" alt="QR Code">
-
+        <h2>Scan & Pay</h2>
+        <p>You are paying for slot <span class="slot-number"><%= slotNumber %></span></p>
+        <div class="qr-container">
+            <img src="<%= qrCodeDataUrl %>" alt="QR Code">
+        </div>
         
-            <input type="hidden" name="slotNumber" value="<%= slotNumber %>">
-            <div id="pink">
+        <div class="payment-form">
             <input type="text" name="name" placeholder="Enter Your Name" required>
             <input type="email" name="email" placeholder="Enter Your Email" required>
-            <form action="/confirm-payment" method="POST">
+            <form action="/confirm-payment" method="POST" onsubmit="showSpinner(event)">
                 <input type="hidden" name="slotNumber" value="<%= slotNumber %>">
-                <button type="submit">Confirm Payment</button>
+                <button type="submit"><i class="fas fa-credit-card"></i> Confirm Payment</button>
+                <div class="spinner">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #d81b60;"></i>
+                </div>
             </form>
-            </div>
-        <a href="/" class="back-link" style="display: block;">← Back to Home</a>
+        </div>
     </div>
+    <script src="/js/payment.js"></script>
 </body>
-</html>
+</html> 
