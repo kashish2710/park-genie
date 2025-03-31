@@ -17,7 +17,8 @@
     
                 const result = await response.json();
                 if (result.success) {
-                    timeLeftElement.innerHTML = `Available in <br> <div class="result-time">${result.timeLeft}</div>`;
+                    timeLeftElement.innerHTML = `Available in <br> <div class="result-time">${result.timeLeft.replace(/\s*left$/, "")
+                    }</div>`;
                 }
             } catch (error) {
                 console.error(`Error updating slot ${slotNumber}:`, error);
