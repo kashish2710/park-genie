@@ -8,10 +8,8 @@
     <link rel="icon" href="/images/logo.png">
 </head>
 <body>
-    <h1>Parking Slot Availability</h1>
-    <div id="block-name">
-    </div>
-     
+    <h1 class="glow" id="typing-container">Parking Slot Availability</h1>
+    <a href="#discuss" class="discuss-tag">Want to discuss something ? </a>
     <div id="parking-slot">
         <% if (slots.length === 0) { %>
             <p>No slots available.</p>
@@ -19,6 +17,7 @@
             <% slots.forEach(slot => { %>
                 <div class="slot <%= slot.isBooked ? 'occupied' : 'available' %>">
                     <span><%= slot.slotNumber %></span>
+                    <br>
                     <span id="time-left-<%= slot.slotNumber %>">
                         <% if (slot.isBooked) { %>
                             <span class="time-left" id="time-left-<%= slot.slotNumber %>">Loading...</span>
@@ -35,6 +34,29 @@
                 </div>
             <% }); %>
         <% } %>
+    </div>
+    <div id="discuss">
+    <div class="container">
+        <h2>Discussion Forum</h2>
+        <div class="discussion-box">
+            <textarea id="comment" placeholder="Write your comment..."></textarea>
+            <button onclick="postComment()">Post</button>
+        </div>
+        <div class="comments" id="comments"></div>
+    </div>
+
+    <div class="container feedback">
+        <h2>Give Your Feedback</h2>
+        <div class="stars" id="stars">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
+        </div>
+        <p id="ratingText">Rate us!</p>
+        <p class="thank-you" id="thankYou">Thank you for your feedback! 💖</p>
+    </div>
     </div>
     <script src="/js/parking-slot.js"></script>
 </body>

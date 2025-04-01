@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion Forum & Feedback</title>
+    <link rel="icon" href="/images/logo.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f8a1c4, #ffd3e0);
+            color: #6d1d38;
+            margin: 7px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .typing-container {
+            font-size: 32px;
+            font-weight: 600;
+            color: #d45d79;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid #d45d79;
+            width: fit-content;
+            display: inline-block;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+        .container {
+            width: 50%;
+            background: linear-gradient(135deg, #ffb6c1, #ff8fa3);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin-top: 20px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+        .container:hover {
+            transform: scale(1.03);
+        }
+        .discussion-box textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px solid #d45d79;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .discussion-box textarea:focus {
+            border-color: #ff3b72;
+            outline: none;
+        }
+        .discussion-box button {
+            background: #d45d79;
+            color: white;
+            padding: 12px 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+        .discussion-box button:hover {
+            background: #ff3b72;
+        }
+        .comments {
+            margin-top: 20px;
+            font-weight: 500;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .feedback h2 {
+            font-weight: 600;
+        }
+        .stars span {
+            font-size: 30px;
+            cursor: pointer;
+            color: #aaa;
+            transition: transform 0.2s ease-in-out, text-shadow 0.3s ease-in-out;
+        }
+        .stars span:hover,
+        .stars span.active {
+            color: #ff3b72;
+            transform: scale(1.2);
+            text-shadow: 0px 0px 10px rgba(255, 59, 114, 0.6);
+        }
+        .thank-you {
+            display: none;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #d45d79;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="typing-container" id="typing"></div>
+    <div class="container">
+        <h2>Discussion Forum</h2>
+        <div class="discussion-box">
+            <textarea id="comment" placeholder="Write your comment..."></textarea>
+            <button onclick="postComment()">Post</button>
+        </div>
+        <div class="comments" id="comments"></div>
+    </div>
+
+    <div class="container feedback">
+        <h2>Give Your Feedback</h2>
+        <div class="stars" id="stars">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
+        </div>
+        <p id="ratingText">Rate us!</p>
+        <p class="thank-you" id="thankYou">Thank you for your feedback! 💖</p>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let text = "ParkGenie-Your Parking Assistant";
+            let index = 0;
+            let typingElement = document.getElementById("typing");
+            
+            function typeEffect() {
+                if (index < text.length) {
+                    typingElement.innerHTML += text.charAt(index);
+                    index++;
+                    setTimeout(typeEffect, 150);
+                }
+            }
+            typeEffect();
+        });
+
+        function postComment() {
+            let commentBox = document.getElementById("comment");
+            let commentsSection = document.getElementById("comments");
+            
+            if (commentBox.value.trim() !== "") {
+                let newComment = document.createElement("p");
+                newComment.textContent = commentBox.value;
+                newComment.style.animation = "fadeIn 0.5s ease-in-out";
+                commentsSection.appendChild(newComment);
+                commentBox.value = "";
+            }
+        }
+
+        let stars = document.querySelectorAll(".stars span");
+        let ratingText = document.getElementById("ratingText");
+        let thankYouMessage = document.getElementById("thankYou");
+        
+        stars.forEach(star => {
+            star.addEventListener("click", function() {
+                let rating = this.getAttribute("data-value");
+                stars.forEach((s, index) => {
+                    if (index < rating) {
+                        s.classList.add("active");
+                    } else {
+                        s.classList.remove("active");
+                    }
+                });
+                ratingText.textContent = "You rated: " + rating + " stars";
+                thankYouMessage.style.display = "block";
+            });
+        });
+    </script>
+</body>
+</html>

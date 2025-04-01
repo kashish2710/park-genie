@@ -68,6 +68,10 @@ app.get("/parking-slot", async (req, res) => {
     }
 });
 
+app.get("/discuss",(req,res)=>{
+    res.render("mains/discuss.ejs")
+})
+
 app.get("/payment", async (req, res) => {
     try {
         const slotNumber = req.query.slotNumber || req.session.slotNumber || "Unknown"; // Read from query first
@@ -165,6 +169,7 @@ app.post("/check-slot", async (req, res) => {
     const bookingTimestamp = slot.bookingTime.toISOString();
 
     const pythonProcess = spawn(process.platform === "win32" ? "python" : "python3", ["predict.py", bookingTimestamp]); //works for both window and mac 
+    // const  pythonProcess= await axios.get(`https://park-genie-4.onrender.com/predict?booking_time=${bookingTimestamp}`);
     let outputData = "";
     let errorData = "";
 
@@ -209,6 +214,7 @@ app.post("/check-slot", async (req, res) => {
         });
     });
 });
+
 
 app.get("/available-slots", async (req, res) => {
     try {
