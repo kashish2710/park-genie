@@ -71,7 +71,9 @@ Flask – Serves ML predictions via API
 ### 2. Set up virtual environment
 
    python3 -m venv venv
-   
+           OR
+   python -m venv venv
+        
    source venv/bin/activate  # On macOS/Linux
    
    venv\Scripts\activate  # On Windows
